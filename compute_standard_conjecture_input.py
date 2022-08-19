@@ -5,8 +5,11 @@ import argparse
 import config
 from scripts.data_manipulation.tptp2tokens import tokenize_line
 
-parser = argparse.ArgumentParser()
-parser.add_argument("id_file", help="Path to the problem ids")
+
+def get_id_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("id_file", help="Path to the problem ids")
+    return parser
 
 
 def get_ids(id_file):
@@ -19,7 +22,7 @@ def get_ids(id_file):
 def main():
 
     # Get arguments
-    args = parser.parse_args()
+    args = get_id_parser().parse_args()
 
     """
     # Get problem paths
