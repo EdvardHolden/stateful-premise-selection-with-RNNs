@@ -9,6 +9,13 @@ parser = argparse.ArgumentParser()
 parser.add_argument("id_file", help="Path to the problem ids")
 
 
+def get_ids(id_file):
+
+    with open(id_file, "r") as f:
+        ids = f.read().splitlines()
+    return ids
+
+
 def main():
 
     # Get arguments
@@ -18,9 +25,7 @@ def main():
     # Get problem paths
     problem_paths = glob.glob(os.path.join(config.ORIGINAL_DATASET, "*"))
     """
-    # TODO do not operate on paths! Need to do this with based on paths of ids
-    with open(args.id_file, "r") as f:
-        ids = f.read().splitlines()
+    ids = get_ids(args.id_file)
 
     # Loop over each problem
     for prob_id in ids:
