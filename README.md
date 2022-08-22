@@ -4,6 +4,21 @@ This repository contains data and scripts related to the paper
 "Stateful Premise Selection with Recurrent Neural Networks"
 submitted to LPAR23.
 
+
+## To run (Deepmath/Merged)
+
+### Aquire data
+Copy ids files to data.
+Run compute* to generate input and output data over the ids.
+
+### Build vocab
+onmt_build_vocab -config opennmt.yaml -tgt_seq_length 1000 -src_seq_length 1000
+
+
+### Train the model
+onmt_train -config opennmt.yaml
+
+
 ## Requirements
 1. Python 3 (version >=3.7).
 2. OpenNMT toolkit (available at: https://github.com/OpenNMT/OpenNMT-py ).
