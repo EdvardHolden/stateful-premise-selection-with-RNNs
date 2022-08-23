@@ -19,6 +19,17 @@ onmt_build_vocab -config opennmt.yaml -tgt_seq_length 1000 -src_seq_length 1000
 onmt_train -config opennmt.yaml
 
 
+### Predict statements into file
+This when -replace_unk, the unkown prediction gets replaced with `(` as it is one of the top symbols in the src input. I removed this parameter to avoid this nonsense, and instead filter away <unk>.
+% onmt_translate -model run/model_step_200.pt -beam_size 10 -n_best 10 -src data/val/standard.src -replace_unk -verbose  -min_length 1 -max_length 64 -output data/predictions/model_step_200.pt.preds
+
+onmt_translate -model run/model_step_200.pt -beam_size 10 -n_best 10 -src data/all/standard.src -min_length 1 -max_length 64 -output data/predictions/model_step_200.pt.preds
+
+To generate the final problems we can run something like:
+
+python3 generate_problems.py data/debug/ids data/predictions/model_step_200.pt.preds
+
+
 ## Requirements
 1. Python 3 (version >=3.7).
 2. OpenNMT toolkit (available at: https://github.com/OpenNMT/OpenNMT-py ).
