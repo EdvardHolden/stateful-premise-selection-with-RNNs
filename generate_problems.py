@@ -3,6 +3,7 @@
 import os
 import pickle
 import argparse
+from tqdm import tqdm
 
 parser = argparse.ArgumentParser()
 
@@ -54,7 +55,7 @@ def main():
     n_pred = int(len(predictions) / len(problem_names))
 
     # Get the prediction of each problem and save to file
-    for prob_no, prob_name in enumerate(problem_names):
+    for prob_no, prob_name in tqdm(enumerate(problem_names)):
         # Variable to store the axioms for this problem
         axioms = set()
         # Loop over each prediction line in the group
@@ -66,7 +67,7 @@ def main():
         conj = get_problem_conjecture(prob_name)
 
         with open(os.path.join(DEST, prob_name), "w") as f:
-            f.write(conj)
+            f.write(conj + '\n')
             f.write("\n".join(axioms))
 
 
